@@ -1,0 +1,24 @@
+module "event-function_repository-function" {
+  source                             = "terraform-google-modules/event-function/google//modules/repository-function"
+  version                            = "6.0.0"
+  environment_variables              = var.environment_variables
+  event_trigger                      = var.event_trigger
+  labels                             = var.labels
+  service_account_email              = var.service_account_email
+  max_instances                      = var.max_instances
+  description                        = var.description
+  entry_point                        = var.entry_point
+  project_id                         = var.project_id
+  source_repository_url              = var.source_repository_url
+  timeout_s                          = var.timeout_s
+  event_trigger_failure_policy_retry = var.event_trigger_failure_policy_retry
+  timeouts                           = var.timeouts
+  trigger_http                       = var.trigger_http
+  name                               = var.name
+  region                             = var.region
+  runtime                            = var.runtime
+  ingress_settings                   = var.ingress_settings
+  vpc_connector_egress_settings      = var.vpc_connector_egress_settings
+  vpc_connector                      = var.vpc_connector
+  available_memory_mb                = var.available_memory_mb
+}

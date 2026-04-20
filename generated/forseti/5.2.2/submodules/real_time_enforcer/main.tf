@@ -1,0 +1,23 @@
+module "forseti_real_time_enforcer" {
+  source                          = "terraform-google-modules/forseti/google//modules/real_time_enforcer"
+  version                         = "5.2.2"
+  storage_bucket_location         = var.storage_bucket_location
+  network                         = var.network
+  subnetwork                      = var.subnetwork
+  enforcer_ssh_allow_ranges       = var.enforcer_ssh_allow_ranges
+  suffix                          = var.suffix
+  enforcer_viewer_role            = var.enforcer_viewer_role
+  client_region                   = var.client_region
+  enforcer_region                 = var.enforcer_region
+  network_project                 = var.network_project
+  manage_firewall_rules           = var.manage_firewall_rules
+  project_id                      = var.project_id
+  enforcer_type                   = var.enforcer_type
+  enforcer_boot_image             = var.enforcer_boot_image
+  enforcer_instance_metadata      = var.enforcer_instance_metadata
+  org_id                          = var.org_id
+  enforcer_instance_private       = var.enforcer_instance_private
+  enforcer_writer_role            = var.enforcer_writer_role
+  topic                           = var.topic
+  enforcer_instance_access_config = var.enforcer_instance_access_config
+}

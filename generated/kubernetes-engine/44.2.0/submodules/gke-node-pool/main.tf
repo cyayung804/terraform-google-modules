@@ -1,0 +1,22 @@
+module "kubernetes-engine_gke-node-pool" {
+  source              = "terraform-google-modules/kubernetes-engine/google//modules/gke-node-pool"
+  version             = "44.2.0"
+  autoscaling         = var.autoscaling
+  management          = var.management
+  max_pods_per_node   = var.max_pods_per_node
+  node_locations      = var.node_locations
+  name_prefix         = var.name_prefix
+  network_config      = var.network_config
+  upgrade_settings    = var.upgrade_settings
+  name                = var.name
+  kubernetes_version  = var.kubernetes_version
+  placement_policy    = var.placement_policy
+  timeouts            = var.timeouts
+  project_id          = var.project_id
+  cluster             = var.cluster
+  initial_node_count  = var.initial_node_count
+  node_config         = var.node_config
+  node_count          = var.node_count
+  queued_provisioning = var.queued_provisioning
+  location            = var.location
+}

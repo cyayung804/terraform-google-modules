@@ -1,0 +1,14 @@
+[
+  {
+    "name": "tenant_project",
+    "description": "The Google managed tenant project ID in which the instance will run its jobs"
+  },
+  {
+    "name": "service_account",
+    "description": "The Google managed Data Fusion Service account"
+  },
+  {
+    "name": "instance",
+    "description": "The created CDF instance"
+  }
+]

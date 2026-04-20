@@ -1,0 +1,22 @@
+module "container-vm_cos-generic" {
+  source                    = "terraform-google-modules/container-vm/google//modules/cos-generic"
+  version                   = "3.2.0"
+  vm_tags                   = var.vm_tags
+  scopes                    = var.scopes
+  stackdriver_logging       = var.stackdriver_logging
+  reserve_ip                = var.reserve_ip
+  allow_stopping_for_update = var.allow_stopping_for_update
+  zone                      = var.zone
+  boot_disk_size            = var.boot_disk_size
+  stackdriver_monitoring    = var.stackdriver_monitoring
+  cloud_init_custom_var     = var.cloud_init_custom_var
+  subnetwork                = var.subnetwork
+  prefix                    = var.prefix
+  cloud_init                = var.cloud_init
+  instance_type             = var.instance_type
+  region                    = var.region
+  instance_count            = var.instance_count
+  service_account           = var.service_account
+  labels                    = var.labels
+  project_id                = var.project_id
+}

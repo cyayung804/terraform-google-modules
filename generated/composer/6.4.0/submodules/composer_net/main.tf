@@ -1,0 +1,19 @@
+module "composer_composer_net" {
+  source                                 = "terraform-google-modules/composer/google//modules/composer_net"
+  version                                = "6.4.0"
+  composer_env_name                      = var.composer_env_name
+  dns_zone_name                          = var.dns_zone_name
+  gke_pods_services_ip_ranges            = var.gke_pods_services_ip_ranges
+  composer_sa_name                       = var.composer_sa_name
+  service_project_id                     = var.service_project_id
+  network                                = var.network
+  master_ipv4_cidr                       = var.master_ipv4_cidr
+  enable_firewall_logging                = var.enable_firewall_logging
+  network_project_id                     = var.network_project_id
+  subnetwork                             = var.subnetwork
+  cloud_composer_network_ipv4_cidr_block = var.cloud_composer_network_ipv4_cidr_block
+  dns_name                               = var.dns_name
+  firewall_logging_metadata              = var.firewall_logging_metadata
+  region                                 = var.region
+  gke_subnet_ip_range                    = var.gke_subnet_ip_range
+}

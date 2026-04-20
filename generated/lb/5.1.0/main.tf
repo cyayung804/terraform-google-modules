@@ -1,0 +1,19 @@
+module "lb" {
+  source                  = "terraform-google-modules/lb/google"
+  version                 = "5.1.0"
+  region                  = var.region
+  network                 = var.network
+  health_check            = var.health_check
+  target_tags             = var.target_tags
+  session_affinity        = var.session_affinity
+  disable_health_check    = var.disable_health_check
+  allowed_ips             = var.allowed_ips
+  name                    = var.name
+  ip_address              = var.ip_address
+  project                 = var.project
+  firewall_project        = var.firewall_project
+  service_port            = var.service_port
+  target_service_accounts = var.target_service_accounts
+  ip_protocol             = var.ip_protocol
+  labels                  = var.labels
+}

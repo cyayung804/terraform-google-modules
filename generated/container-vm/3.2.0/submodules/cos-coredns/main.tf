@@ -1,0 +1,25 @@
+module "container-vm_cos-coredns" {
+  source                 = "terraform-google-modules/container-vm/google//modules/cos-coredns"
+  version                = "3.2.0"
+  zone                   = var.zone
+  subnetwork             = var.subnetwork
+  corefile               = var.corefile
+  network_tag            = var.network_tag
+  prefix                 = var.prefix
+  container_image        = var.container_image
+  network                = var.network
+  create_firewall_rule   = var.create_firewall_rule
+  stackdriver_logging    = var.stackdriver_logging
+  stackdriver_monitoring = var.stackdriver_monitoring
+  labels                 = var.labels
+  project_id             = var.project_id
+  region                 = var.region
+  instance_count         = var.instance_count
+  vm_tags                = var.vm_tags
+  instance_type          = var.instance_type
+  scopes                 = var.scopes
+  service_account        = var.service_account
+  client_cidrs           = var.client_cidrs
+  boot_disk_size         = var.boot_disk_size
+  log_driver             = var.log_driver
+}

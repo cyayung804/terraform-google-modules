@@ -1,0 +1,19 @@
+module "project-factory_budget" {
+  source                           = "terraform-google-modules/project-factory/google//modules/budget"
+  version                          = "18.2.0"
+  labels                           = var.labels
+  services                         = var.services
+  custom_period_start_date         = var.custom_period_start_date
+  alert_spent_percents             = var.alert_spent_percents
+  alert_pubsub_topic               = var.alert_pubsub_topic
+  billing_account                  = var.billing_account
+  create_budget                    = var.create_budget
+  credit_types_treatment           = var.credit_types_treatment
+  custom_period_end_date           = var.custom_period_end_date
+  alert_spend_basis                = var.alert_spend_basis
+  monitoring_notification_channels = var.monitoring_notification_channels
+  projects                         = var.projects
+  amount                           = var.amount
+  display_name                     = var.display_name
+  calendar_period                  = var.calendar_period
+}

@@ -1,0 +1,27 @@
+module "bootstrap_tf_cloudbuild_builder" {
+  source                       = "terraform-google-modules/bootstrap/google//modules/tf_cloudbuild_builder"
+  version                      = "12.0.0"
+  bucket_name                  = var.bucket_name
+  workflow_name                = var.workflow_name
+  workflow_region              = var.workflow_region
+  workflow_deletion_protection = var.workflow_deletion_protection
+  gar_repo_name                = var.gar_repo_name
+  gar_repo_location            = var.gar_repo_location
+  dockerfile_repo_type         = var.dockerfile_repo_type
+  enable_worker_pool           = var.enable_worker_pool
+  worker_pool_id               = var.worker_pool_id
+  workflow_sa                  = var.workflow_sa
+  trigger_name                 = var.trigger_name
+  trigger_location             = var.trigger_location
+  dockerfile_repo_uri          = var.dockerfile_repo_uri
+  cloudbuild_sa                = var.cloudbuild_sa
+  build_timeout                = var.build_timeout
+  cb_logs_bucket_force_destroy = var.cb_logs_bucket_force_destroy
+  terraform_version            = var.terraform_version
+  image_name                   = var.image_name
+  dockerfile_repo_ref          = var.dockerfile_repo_ref
+  dockerfile_repo_dir          = var.dockerfile_repo_dir
+  project_id                   = var.project_id
+  workflow_schedule            = var.workflow_schedule
+  use_cloudbuildv2_repository  = var.use_cloudbuildv2_repository
+}

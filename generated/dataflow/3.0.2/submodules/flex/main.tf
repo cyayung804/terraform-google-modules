@@ -1,0 +1,25 @@
+module "dataflow_flex" {
+  source                       = "terraform-google-modules/dataflow/google//modules/flex"
+  version                      = "3.0.2"
+  parameters                   = var.parameters
+  sdk_container_image          = var.sdk_container_image
+  project_id                   = var.project_id
+  max_workers                  = var.max_workers
+  network_name                 = var.network_name
+  launcher_machine_type        = var.launcher_machine_type
+  machine_type                 = var.machine_type
+  skip_wait_on_job_termination = var.skip_wait_on_job_termination
+  name                         = var.name
+  region                       = var.region
+  subnetwork                   = var.subnetwork
+  enable_streaming_engine      = var.enable_streaming_engine
+  labels                       = var.labels
+  use_public_ips               = var.use_public_ips
+  temp_location                = var.temp_location
+  on_delete                    = var.on_delete
+  service_account_email        = var.service_account_email
+  kms_key_name                 = var.kms_key_name
+  additional_experiments       = var.additional_experiments
+  container_spec_gcs_path      = var.container_spec_gcs_path
+  autoscaling_algorithm        = var.autoscaling_algorithm
+}

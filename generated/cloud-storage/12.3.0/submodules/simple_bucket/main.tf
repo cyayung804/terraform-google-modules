@@ -1,0 +1,27 @@
+module "cloud-storage_simple_bucket" {
+  source                     = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
+  version                    = "12.3.0"
+  project_id                 = var.project_id
+  labels                     = var.labels
+  bucket_policy_only         = var.bucket_policy_only
+  versioning                 = var.versioning
+  encryption                 = var.encryption
+  lifecycle_rules            = var.lifecycle_rules
+  log_bucket                 = var.log_bucket
+  soft_delete_policy         = var.soft_delete_policy
+  location                   = var.location
+  force_destroy              = var.force_destroy
+  storage_class              = var.storage_class
+  hierarchical_namespace     = var.hierarchical_namespace
+  custom_placement_config    = var.custom_placement_config
+  cors                       = var.cors
+  log_object_prefix          = var.log_object_prefix
+  internal_encryption_config = var.internal_encryption_config
+  name                       = var.name
+  iam_members                = var.iam_members
+  public_access_prevention   = var.public_access_prevention
+  ip_filter                  = var.ip_filter
+  autoclass                  = var.autoclass
+  retention_policy           = var.retention_policy
+  website                    = var.website
+}

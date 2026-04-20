@@ -1,0 +1,19 @@
+module "vm_umig" {
+  source                    = "terraform-google-modules/vm/google//modules/umig"
+  version                   = "15.2.0"
+  project_id                = var.project_id
+  region                    = var.region
+  subnetwork_project        = var.subnetwork_project
+  num_instances             = var.num_instances
+  named_ports               = var.named_ports
+  access_config             = var.access_config
+  ipv6_access_config        = var.ipv6_access_config
+  hostname                  = var.hostname
+  instance_template         = var.instance_template
+  zones                     = var.zones
+  network                   = var.network
+  subnetwork                = var.subnetwork
+  additional_networks       = var.additional_networks
+  static_ips                = var.static_ips
+  hostname_suffix_separator = var.hostname_suffix_separator
+}

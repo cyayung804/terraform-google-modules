@@ -1,0 +1,27 @@
+module "network" {
+  source                                    = "terraform-google-modules/network/google"
+  version                                   = "18.1.1"
+  network_name                              = var.network_name
+  egress_rules                              = var.egress_rules
+  enable_ipv6_ula                           = var.enable_ipv6_ula
+  internal_ipv6_range                       = var.internal_ipv6_range
+  network_profile                           = var.network_profile
+  private_service_access_config             = var.private_service_access_config
+  subnets_region                            = var.subnets_region
+  routes                                    = var.routes
+  description                               = var.description
+  auto_create_subnetworks                   = var.auto_create_subnetworks
+  network_firewall_policy_enforcement_order = var.network_firewall_policy_enforcement_order
+  bgp_inter_region_cost                     = var.bgp_inter_region_cost
+  shared_vpc_host                           = var.shared_vpc_host
+  subnets                                   = var.subnets
+  delete_default_internet_gateway_routes    = var.delete_default_internet_gateway_routes
+  mtu                                       = var.mtu
+  ingress_rules                             = var.ingress_rules
+  bgp_always_compare_med                    = var.bgp_always_compare_med
+  bgp_best_path_selection_mode              = var.bgp_best_path_selection_mode
+  project_id                                = var.project_id
+  routing_mode                              = var.routing_mode
+  secondary_ranges                          = var.secondary_ranges
+  firewall_rules                            = var.firewall_rules
+}

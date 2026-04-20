@@ -1,0 +1,19 @@
+module "gcloud_kubectl-fleet-wrapper" {
+  source                            = "terraform-google-modules/gcloud/google//modules/kubectl-fleet-wrapper"
+  version                           = "4.0.0"
+  membership_project_id             = var.membership_project_id
+  kubectl_create_command            = var.kubectl_create_command
+  additional_components             = var.additional_components
+  service_account_key_file          = var.service_account_key_file
+  use_tf_google_credentials_env_var = var.use_tf_google_credentials_env_var
+  impersonate_service_account       = var.impersonate_service_account
+  upgrade                           = var.upgrade
+  membership_name                   = var.membership_name
+  membership_location               = var.membership_location
+  enabled                           = var.enabled
+  skip_download                     = var.skip_download
+  kubectl_destroy_command           = var.kubectl_destroy_command
+  module_depends_on                 = var.module_depends_on
+  create_cmd_triggers               = var.create_cmd_triggers
+  gcloud_sdk_version                = var.gcloud_sdk_version
+}

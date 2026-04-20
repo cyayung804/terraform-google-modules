@@ -1,0 +1,10 @@
+module "bigquery_authorization" {
+  source              = "terraform-google-modules/bigquery/google//modules/authorization"
+  version             = "10.2.1"
+  authorized_routines = var.authorized_routines
+  dataset_id          = var.dataset_id
+  project_id          = var.project_id
+  roles               = var.roles
+  authorized_views    = var.authorized_views
+  authorized_datasets = var.authorized_datasets
+}

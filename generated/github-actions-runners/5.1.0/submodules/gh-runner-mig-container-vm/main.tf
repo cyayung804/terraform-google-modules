@@ -1,0 +1,23 @@
+module "github-actions-runners_gh-runner-mig-container-vm" {
+  source              = "terraform-google-modules/github-actions-runners/google//modules/gh-runner-mig-container-vm"
+  version             = "5.1.0"
+  network_name        = var.network_name
+  subnet_ip           = var.subnet_ip
+  repo_owner          = var.repo_owner
+  target_size         = var.target_size
+  service_account     = var.service_account
+  dind                = var.dind
+  cooldown_period     = var.cooldown_period
+  region              = var.region
+  gh_token            = var.gh_token
+  instance_name       = var.instance_name
+  project_id          = var.project_id
+  create_network      = var.create_network
+  restart_policy      = var.restart_policy
+  image               = var.image
+  repo_name           = var.repo_name
+  additional_metadata = var.additional_metadata
+  subnetwork_project  = var.subnetwork_project
+  subnet_name         = var.subnet_name
+  repo_url            = var.repo_url
+}

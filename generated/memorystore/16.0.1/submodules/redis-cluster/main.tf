@@ -1,0 +1,26 @@
+module "memorystore_redis-cluster" {
+  source                        = "terraform-google-modules/memorystore/google//modules/redis-cluster"
+  version                       = "16.0.1"
+  name                          = var.name
+  region                        = var.region
+  replica_count                 = var.replica_count
+  kms_key                       = var.kms_key
+  cluster_role                  = var.cluster_role
+  primary_cluster               = var.primary_cluster
+  project_id                    = var.project_id
+  enable_apis                   = var.enable_apis
+  shard_count                   = var.shard_count
+  zone_distribution_config_mode = var.zone_distribution_config_mode
+  zone_distribution_config_zone = var.zone_distribution_config_zone
+  transit_encryption_mode       = var.transit_encryption_mode
+  authorization_mode            = var.authorization_mode
+  service_connection_policies   = var.service_connection_policies
+  node_type                     = var.node_type
+  redis_configs                 = var.redis_configs
+  weekly_maintenance_window     = var.weekly_maintenance_window
+  network                       = var.network
+  deletion_protection_enabled   = var.deletion_protection_enabled
+  persistence_config            = var.persistence_config
+  secondary_clusters            = var.secondary_clusters
+  labels                        = var.labels
+}

@@ -1,0 +1,20 @@
+module "vpc-service-controls_access_level" {
+  source                           = "terraform-google-modules/vpc-service-controls/google//modules/access_level"
+  version                          = "8.0.0"
+  os_type                          = var.os_type
+  policy                           = var.policy
+  vpc_network_sources              = var.vpc_network_sources
+  name                             = var.name
+  description                      = var.description
+  required_access_levels           = var.required_access_levels
+  members                          = var.members
+  require_corp_owned               = var.require_corp_owned
+  allowed_device_management_levels = var.allowed_device_management_levels
+  minimum_version                  = var.minimum_version
+  ip_subnetworks                   = var.ip_subnetworks
+  regions                          = var.regions
+  require_screen_lock              = var.require_screen_lock
+  allowed_encryption_statuses      = var.allowed_encryption_statuses
+  combining_function               = var.combining_function
+  negate                           = var.negate
+}

@@ -1,0 +1,21 @@
+module "gke-gitlab" {
+  source                      = "terraform-google-modules/gke-gitlab/google"
+  version                     = "3.0.0"
+  domain                      = var.domain
+  certmanager_email           = var.certmanager_email
+  gke_version                 = var.gke_version
+  gitlab_address_name         = var.gitlab_address_name
+  project_id                  = var.project_id
+  gitlab_pods_subnet_cidr     = var.gitlab_pods_subnet_cidr
+  gitlab_services_subnet_cidr = var.gitlab_services_subnet_cidr
+  gitlab_db_password          = var.gitlab_db_password
+  gitlab_deletion_protection  = var.gitlab_deletion_protection
+  gitlab_runner_install       = var.gitlab_runner_install
+  gitlab_nodes_subnet_cidr    = var.gitlab_nodes_subnet_cidr
+  helm_chart_version          = var.helm_chart_version
+  gitlab_db_name              = var.gitlab_db_name
+  gitlab_db_random_prefix     = var.gitlab_db_random_prefix
+  region                      = var.region
+  allow_force_destroy         = var.allow_force_destroy
+  gke_machine_type            = var.gke_machine_type
+}
