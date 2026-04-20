@@ -7,11 +7,12 @@ echo "==> Running setup.sh" >&2
 setup_uv()
 {
     local uv_url="https://astral.sh/uv/install.sh"
+    local uv_path="${HOME}/.local/bin"
     local python_version="3.10"
 
     echo "  -> Running ${FUNCNAME}" >&2
     curl -fsSL "${uv_url}" | sh
-    export "PATH=${PATH}:${HOME}/.local/bin"
+    export "PATH=${PATH}:${uv_path}"
 
     echo "  -> Installing python ${python_version}" >&2
     uv python install ${python_version} --default
