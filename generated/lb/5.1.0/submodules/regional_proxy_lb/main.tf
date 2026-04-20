@@ -1,0 +1,19 @@
+module "lb_regional_proxy_lb" {
+  source                   = "terraform-google-modules/lb/google//modules/regional_proxy_lb"
+  version                  = "5.1.0"
+  backend                  = var.backend
+  project                  = var.project
+  region                   = var.region
+  port_front_end           = var.port_front_end
+  proxy_header             = var.proxy_header
+  name                     = var.name
+  network_project          = var.network_project
+  proxy_only_subnet_cidr   = var.proxy_only_subnet_cidr
+  network                  = var.network
+  network_tier             = var.network_tier
+  target_tags              = var.target_tags
+  create_proxy_only_subnet = var.create_proxy_only_subnet
+  health_check             = var.health_check
+  create_firewall_rules    = var.create_firewall_rules
+  address                  = var.address
+}

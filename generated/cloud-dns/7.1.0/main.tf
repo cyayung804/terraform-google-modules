@@ -1,0 +1,25 @@
+module "cloud-dns" {
+  source                             = "terraform-google-modules/cloud-dns/google"
+  version                            = "7.1.0"
+  description                        = var.description
+  type                               = var.type
+  force_destroy                      = var.force_destroy
+  recordsets                         = var.recordsets
+  iam_choice                         = var.iam_choice
+  project_id                         = var.project_id
+  target_network                     = var.target_network
+  member                             = var.member
+  role                               = var.role
+  domain                             = var.domain
+  private_visibility_config_networks = var.private_visibility_config_networks
+  default_key_specs_zone             = var.default_key_specs_zone
+  service_namespace_url              = var.service_namespace_url
+  enable_logging                     = var.enable_logging
+  name                               = var.name
+  dnssec_config                      = var.dnssec_config
+  labels                             = var.labels
+  default_key_specs_key              = var.default_key_specs_key
+  members                            = var.members
+  gke_clusters_list                  = var.gke_clusters_list
+  target_name_server_addresses       = var.target_name_server_addresses
+}

@@ -1,0 +1,26 @@
+module "vm_preemptible_and_regular_instance_templates" {
+  source               = "terraform-google-modules/vm/google//modules/preemptible_and_regular_instance_templates"
+  version              = "15.2.0"
+  can_ip_forward       = var.can_ip_forward
+  labels               = var.labels
+  source_image_project = var.source_image_project
+  disk_type            = var.disk_type
+  subnetwork           = var.subnetwork
+  startup_script       = var.startup_script
+  region               = var.region
+  source_image         = var.source_image
+  auto_delete          = var.auto_delete
+  network              = var.network
+  ipv6_access_config   = var.ipv6_access_config
+  project_id           = var.project_id
+  name_prefix          = var.name_prefix
+  machine_type         = var.machine_type
+  disk_size_gb         = var.disk_size_gb
+  additional_disks     = var.additional_disks
+  metadata             = var.metadata
+  service_account      = var.service_account
+  access_config        = var.access_config
+  tags                 = var.tags
+  source_image_family  = var.source_image_family
+  subnetwork_project   = var.subnetwork_project
+}

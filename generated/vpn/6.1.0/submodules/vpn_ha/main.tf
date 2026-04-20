@@ -1,0 +1,23 @@
+module "vpn_vpn_ha" {
+  source                           = "terraform-google-modules/vpn/google//modules/vpn_ha"
+  version                          = "6.1.0"
+  labels                           = var.labels
+  ipsec_secret_length              = var.ipsec_secret_length
+  peer_external_gateway            = var.peer_external_gateway
+  peer_gcp_gateway                 = var.peer_gcp_gateway
+  name                             = var.name
+  route_priority                   = var.route_priority
+  stack_type                       = var.stack_type
+  project_id                       = var.project_id
+  vpn_gateway_self_link            = var.vpn_gateway_self_link
+  router_name                      = var.router_name
+  tunnels                          = var.tunnels
+  interconnect_attachment          = var.interconnect_attachment
+  network                          = var.network
+  router_asn                       = var.router_asn
+  keepalive_interval               = var.keepalive_interval
+  create_vpn_gateway               = var.create_vpn_gateway
+  external_vpn_gateway_description = var.external_vpn_gateway_description
+  region                           = var.region
+  router_advertise_config          = var.router_advertise_config
+}

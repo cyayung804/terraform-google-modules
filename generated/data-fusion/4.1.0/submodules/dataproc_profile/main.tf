@@ -1,0 +1,20 @@
+module "data-fusion_dataproc_profile" {
+  source                  = "terraform-google-modules/data-fusion/google//modules/dataproc_profile"
+  version                 = "4.1.0"
+  encryption_key_name     = var.encryption_key_name
+  name                    = var.name
+  label                   = var.label
+  project                 = var.project
+  subnet                  = var.subnet
+  account_key             = var.account_key
+  extra_properties        = var.extra_properties
+  namespace               = var.namespace
+  region                  = var.region
+  service_account         = var.service_account
+  image_version           = var.image_version
+  worker                  = var.worker
+  network                 = var.network
+  network_host_project_id = var.network_host_project_id
+  gcs_bucket              = var.gcs_bucket
+  master                  = var.master
+}

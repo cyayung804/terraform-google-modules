@@ -1,0 +1,24 @@
+module "bigquery" {
+  source                          = "terraform-google-modules/bigquery/google"
+  version                         = "10.2.1"
+  max_time_travel_hours           = var.max_time_travel_hours
+  dataset_labels                  = var.dataset_labels
+  tables                          = var.tables
+  dataset_name                    = var.dataset_name
+  storage_billing_model           = var.storage_billing_model
+  materialized_views              = var.materialized_views
+  deletion_protection             = var.deletion_protection
+  access                          = var.access
+  views                           = var.views
+  external_tables                 = var.external_tables
+  routines                        = var.routines
+  encryption_key                  = var.encryption_key
+  resource_tags                   = var.resource_tags
+  dataset_id                      = var.dataset_id
+  location                        = var.location
+  delete_contents_on_destroy      = var.delete_contents_on_destroy
+  default_table_expiration_ms     = var.default_table_expiration_ms
+  default_partition_expiration_ms = var.default_partition_expiration_ms
+  project_id                      = var.project_id
+  description                     = var.description
+}

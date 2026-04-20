@@ -1,0 +1,23 @@
+module "vm_compute_instance" {
+  source                    = "terraform-google-modules/vm/google//modules/compute_instance"
+  version                   = "15.2.0"
+  project_id                = var.project_id
+  hostname                  = var.hostname
+  instance_template         = var.instance_template
+  deletion_protection       = var.deletion_protection
+  alias_ip_ranges           = var.alias_ip_ranges
+  resource_policies         = var.resource_policies
+  region                    = var.region
+  network                   = var.network
+  subnetwork                = var.subnetwork
+  ipv6_access_config        = var.ipv6_access_config
+  zone                      = var.zone
+  hostname_suffix_separator = var.hostname_suffix_separator
+  labels                    = var.labels
+  resource_manager_tags     = var.resource_manager_tags
+  subnetwork_project        = var.subnetwork_project
+  add_hostname_suffix       = var.add_hostname_suffix
+  static_ips                = var.static_ips
+  access_config             = var.access_config
+  num_instances             = var.num_instances
+}

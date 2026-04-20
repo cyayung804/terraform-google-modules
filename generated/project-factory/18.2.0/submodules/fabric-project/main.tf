@@ -1,0 +1,23 @@
+module "project-factory_fabric-project" {
+  source                    = "terraform-google-modules/project-factory/google//modules/fabric-project"
+  version                   = "18.2.0"
+  owners                    = var.owners
+  editors                   = var.editors
+  lien_reason               = var.lien_reason
+  extra_bindings_roles      = var.extra_bindings_roles
+  deletion_policy           = var.deletion_policy
+  activate_apis             = var.activate_apis
+  oslogin_users             = var.oslogin_users
+  parent                    = var.parent
+  name                      = var.name
+  custom_roles              = var.custom_roles
+  gce_service_account_roles = var.gce_service_account_roles
+  prefix                    = var.prefix
+  billing_account           = var.billing_account
+  viewers                   = var.viewers
+  oslogin                   = var.oslogin
+  oslogin_admins            = var.oslogin_admins
+  extra_bindings_members    = var.extra_bindings_members
+  auto_create_network       = var.auto_create_network
+  labels                    = var.labels
+}

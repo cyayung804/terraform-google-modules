@@ -1,0 +1,22 @@
+module "dataflow_legacy" {
+  source                       = "terraform-google-modules/dataflow/google//modules/legacy"
+  version                      = "3.0.2"
+  parameters                   = var.parameters
+  template_gcs_path            = var.template_gcs_path
+  subnetwork                   = var.subnetwork
+  machine_type                 = var.machine_type
+  project_id                   = var.project_id
+  name                         = var.name
+  temp_gcs_location            = var.temp_gcs_location
+  on_delete                    = var.on_delete
+  enable_streaming_engine      = var.enable_streaming_engine
+  kms_key_name                 = var.kms_key_name
+  labels                       = var.labels
+  region                       = var.region
+  service_account_email        = var.service_account_email
+  network_name                 = var.network_name
+  use_public_ips               = var.use_public_ips
+  skip_wait_on_job_termination = var.skip_wait_on_job_termination
+  max_workers                  = var.max_workers
+  additional_experiments       = var.additional_experiments
+}

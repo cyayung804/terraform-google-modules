@@ -1,0 +1,19 @@
+module "forseti_cloudsql" {
+  source                     = "terraform-google-modules/forseti/google//modules/cloudsql"
+  version                    = "5.2.2"
+  suffix                     = var.suffix
+  cloudsql_type              = var.cloudsql_type
+  cloudsql_password          = var.cloudsql_password
+  network                    = var.network
+  project_id                 = var.project_id
+  services                   = var.services
+  enable_service_networking  = var.enable_service_networking
+  cloudsql_db_name           = var.cloudsql_db_name
+  cloudsql_private           = var.cloudsql_private
+  cloudsql_net_write_timeout = var.cloudsql_net_write_timeout
+  cloudsql_user_host         = var.cloudsql_user_host
+  network_project            = var.network_project
+  cloudsql_region            = var.cloudsql_region
+  cloudsql_disk_size         = var.cloudsql_disk_size
+  cloudsql_user              = var.cloudsql_user
+}
