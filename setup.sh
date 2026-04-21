@@ -2,33 +2,35 @@
 
 set -e
 
-echo "==> Running setup.sh" >&2
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-setup_uv()
+echo "==> Running: ${HERE}/setup.sh"
+
+function setup_uv()
 {
     local uv_url="https://astral.sh/uv/install.sh"
     local uv_path="${HOME}/.local/bin"
     local python_version="3.10"
 
-    echo "  -> Running ${FUNCNAME}" >&2
+    echo "  -> Initializing ${FUNCNAME}..."
+
     curl -fsSL "${uv_url}" | sh
-    export "PATH=${PATH}:${uv_path}"
+    export PATH="${uv_path}:${PATH}"
 
-    echo "  -> Installing python ${python_version}" >&2
-    uv python install ${python_version} --default
+    echo "  -> Installing Python ${python_version}..."
+    uv python install "${python_version}" --default
 
-    echo "  -> Creating virtual environment" >&2
+    echo "  -> Creating virtual environment..."
     uv venv --clear
-    source .venv/bin/activate
 
-    echo "  -> Installing dependencies" >&2
-    uv pip install -r requirements.txt
+    source "$(readlink -f .venv/bin/activate)"
 
-    echo "Activate with: source .venv/bin/activate" >&2
+    echo "  -> Installing dependencies from requirements.txt..."
+    uv pip install -r "$(readlink -f requirements.txt)"
+
+    echo "Activate with: source .venv/bin/activate"
 }
 
 setup_uv
 
-echo "Done!" >&2
-
-exit 0
+echo "Done!"
