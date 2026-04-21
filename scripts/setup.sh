@@ -23,9 +23,10 @@ function setup_uv()
     echo "  -> Creating virtual environment..."
     uv venv --clear
 
+    echo "  -> Sourcing "$(readlink -f .venv/bin/activate)"..."
     source "$(readlink -f .venv/bin/activate)"
 
-    echo "  -> Installing dependencies from requirements.txt..."
+    echo "  -> Installing dependencies from "$(readlink -f requirements.txt)"..."
     uv pip install -r "$(readlink -f requirements.txt)"
 
     echo "Activate with: source .venv/bin/activate"

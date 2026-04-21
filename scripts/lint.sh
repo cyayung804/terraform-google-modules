@@ -12,6 +12,7 @@ function uv_lint()
 {
     echo "  -> Initializing ${FUNCNAME}..."
 
+    echo "  -> Sourcing "$(readlink -f .venv/bin/activate)"..."
     source "$(readlink -f .venv/bin/activate)"
 
     echo "  -> Running ruff check..."
