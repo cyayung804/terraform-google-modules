@@ -4,11 +4,11 @@ set -e
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-source "${HERE}/setup.sh"
+source "${HERE}/install.sh"
 
-echo "==> Running: ${HERE}/lint.sh"
+echo "==> Running: ${HERE}/format.sh"
 
-function uv_lint()
+function uv_ruff()
 {
     echo "  -> Initializing ${FUNCNAME}..."
 
@@ -22,6 +22,6 @@ function uv_lint()
     uv run ruff format .
 }
 
-uv_lint
+uv_ruff
 
 echo "Done!"
