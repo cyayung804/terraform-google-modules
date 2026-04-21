@@ -4,9 +4,9 @@ set -e
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "==> Running: ${HERE}/setup.sh"
+echo "==> Running: ${HERE}/install.sh"
 
-function setup_uv()
+function install_uv()
 {
     local uv_url="https://astral.sh/uv/install.sh"
     local uv_path="${HOME}/.local/bin"
@@ -32,6 +32,6 @@ function setup_uv()
     echo "Activate with: source .venv/bin/activate"
 }
 
-setup_uv
+install_uv
 
 echo "Done!"
