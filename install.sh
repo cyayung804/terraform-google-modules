@@ -37,13 +37,6 @@ function install_uv()
 
     echo "  -> Installing Python ${python_version}..."
     uv python install "${python_version}" --default
-
-    echo "  -> Creating virtual environment..."
-    uv venv --clear
-    source "$(readlink -f .venv/bin/activate)"
-
-    echo "  -> Installing dependencies from "$(readlink -f requirements.txt)"..."
-    uv pip install -r "$(readlink -f requirements.txt)"
 }
 
 install_terraform

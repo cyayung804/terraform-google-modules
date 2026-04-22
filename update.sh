@@ -4,11 +4,10 @@ set -e
 
 source .env || true
 
+source install.sh
+
 function update_terraform_modules()
 {
-    local base_url="https://registry.terraform.io/v1/modules"
-    namespace="${1:-terraform-google-modules}"
-    provider="${2:-google}"
     response="$(curl -fsSL "${base_url}?namespace=${namespace}&provider=${provider}&limit=999")"
 
     echo "  -> Initializing ${FUNCNAME}..."
@@ -67,4 +66,37 @@ function update_terraform_modules()
     done
 }
 
+function generate_terraform_modules()
+{
+    echo "  -> Initializing ${FUNCNAME}..."
+
+    uv --version
+
+    echo "  -> Creating virtual environment..."
+    uv venv --clear
+    source "$(readlink -f .venv/bin/activate)"
+
+    python --version
+
+    echo "  -> Installing dependencies from "$(readlink -f requirements.txt)"..."
+    uv pip install -r "$(readlink -f requirements.txt)"
+
+}
+
+function format_terraform_modules()
+{
+    echo "  -> Initializing ${FUNCNAME}..."
+
+    terraform --version
+
+    echo "  -> Formating terraform..."
+    terraform fmt -recursive .
+}
+
 update_terraform_modules
+generate_terraform_modules
+format_terraform_modules
+
+echo "Done!"
+
+exit 0
