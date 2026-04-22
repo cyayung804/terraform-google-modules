@@ -1,1 +1,3 @@
-Blueprints and modules help you automate provisioning and managing Google Cloud resources at scale.
+Google Cloud and HashiCorp
+
+Terraform modules for Google Cloud
