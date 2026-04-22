@@ -2,24 +2,26 @@
 
 set -e
 
+source .env || true
+
 function update_terraform_modules()
 {
-    local namespace="terraform-google-modules"
-    local provider="google"
     local base_url="https://registry.terraform.io/v1/modules"
-    local response="$(curl -fsSL "${base_url}?namespace=${namespace}&provider=${provider}&limit=999")"
+    namespace="${1:-terraform-google-modules}"
+    provider="${2:-google}"
+    response="$(curl -fsSL "${base_url}?namespace=${namespace}&provider=${provider}&limit=999")"
 
     echo "  -> Initializing ${FUNCNAME}..."
 
     echo "  -> Fetching Terraform modules..."
     echo "${response}" | jq -r '.modules[].name' | while read -r name; do
 
-      local versions_url="${base_url}/${namespace}/${name}/${provider}/versions"
-      local versions_json="$(curl -fsSL "${versions_url}")"
-      local latest_version="$(echo "${versions_json}" | jq -r '.modules[0].versions[].version' | sort -V | tail -n1)"
-      local module_dir="${name}/${latest_version}"
-      local module_url="${base_url}/${namespace}/${name}/${provider}/${latest_version}"
-      local module_json="$(curl -fsSL "${module_url}")"
+      versions_url="${base_url}/${namespace}/${name}/${provider}/versions"
+      versions_json="$(curl -fsSL "${versions_url}")"
+      latest_version="$(echo "${versions_json}" | jq -r '.modules[0].versions[].version' | sort -V | tail -n1)"
+      module_dir="build/${name}/${latest_version}"
+      module_url="${base_url}/${namespace}/${name}/${provider}/${latest_version}"
+      module_json="$(curl -fsSL "${module_url}")"
 
       echo "    -> Processing module ${name} version ${latest_version}..."
       if [ -d "${module_dir}" ]; then
@@ -42,8 +44,8 @@ function update_terraform_modules()
 
         echo "${module_json}" | jq -c '.submodules[]' | while read -r submodule_json; do
 
-          local submodule_name="$(echo "${submodule_json}" | jq -r '.name')"
-          local submodule_dir="${module_dir}/submodules/${submodule_name}"
+          submodule_name="$(echo "${submodule_json}" | jq -r '.name')"
+          submodule_dir="${module_dir}/submodules/${submodule_name}"
 
           echo "      -> Processing submodule ${submodule_name} version ${latest_version}..."
           if [ -d "${submodule_dir}" ]; then

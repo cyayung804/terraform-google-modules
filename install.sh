@@ -4,10 +4,9 @@ set -e
 
 function install_terraform()
 {
-    local arch="$(case "$(uname -m)" in x86_64) echo amd64 ;; aarch64) echo arm64 ;; esac)"
     local terraform_version="1.14.9"
-    local terraform_download_url="https://releases.hashicorp.com/terraform/${terraform_version}/terraform_${terraform_version}_linux_${arch}.zip"
-    local terraform_install_path="/usr/local/bin/terraform"
+    arch="$(case "$(uname -m)" in x86_64) echo amd64 ;; aarch64) echo arm64 ;; esac)"
+    terraform_download_url="https://releases.hashicorp.com/terraform/${terraform_version}/terraform_${terraform_version}_linux_${arch}.zip"
 
     echo "  -> Initializing ${FUNCNAME}..."
 
@@ -16,8 +15,8 @@ function install_terraform()
 
     echo "  -> Unzipping terraform..."
     unzip /tmp/terraform.zip terraform -d /tmp
-    sudo cp /tmp/terraform ${terraform_install_path}
-    sudo chmod +x ${terraform_install_path}
+    sudo cp /tmp/terraform /usr/local/bin/terraform
+    sudo chmod +x /usr/local/bin/terraform
 
     echo "  -> Cleaning up..."
     sudo rm -v /tmp/terraform
@@ -26,9 +25,9 @@ function install_terraform()
 
 function install_uv()
 {
-    local uv_download_url="https://astral.sh/uv/install.sh"
-    local uv_install_path="${HOME}/.local/bin"
     local python_version="3.10"
+    local uv_download_url="https://astral.sh/uv/install.sh"
+    uv_install_path="${HOME}/.local/bin"
 
     echo "  -> Initializing ${FUNCNAME}..."
 
