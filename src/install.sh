@@ -2,6 +2,8 @@
 
 set -e
 
+echo "==> Running $(dirname "$(realpath "$0")")/install.sh"
+
 function install_terraform()
 {
     local terraform_version="1.14.9"
