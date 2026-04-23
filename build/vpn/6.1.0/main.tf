@@ -1,0 +1,26 @@
+module "vpn" {
+  source                    = "terraform-google-modules/vpn/google"
+  version                   = "6.1.0"
+  gateway_name              = var.gateway_name
+  local_traffic_selector    = var.local_traffic_selector
+  peer_ips                  = var.peer_ips
+  vpn_gw_ip                 = var.vpn_gw_ip
+  project_id                = var.project_id
+  network                   = var.network
+  tunnel_count              = var.tunnel_count
+  route_priority            = var.route_priority
+  cr_name                   = var.cr_name
+  cr_enabled                = var.cr_enabled
+  advertised_route_priority = var.advertised_route_priority
+  route_tags                = var.route_tags
+  region                    = var.region
+  tunnel_name_prefix        = var.tunnel_name_prefix
+  remote_traffic_selector   = var.remote_traffic_selector
+  peer_asn                  = var.peer_asn
+  ike_version               = var.ike_version
+  ipsec_secret_length       = var.ipsec_secret_length
+  remote_subnet             = var.remote_subnet
+  shared_secret             = var.shared_secret
+  bgp_cr_session_range      = var.bgp_cr_session_range
+  bgp_remote_session_range  = var.bgp_remote_session_range
+}

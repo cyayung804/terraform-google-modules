@@ -1,0 +1,24 @@
+module "kms" {
+  source                         = "terraform-google-modules/kms/google"
+  version                        = "4.1.2"
+  keys                           = var.keys
+  owners                         = var.owners
+  decrypters                     = var.decrypters
+  key_rotation_period            = var.key_rotation_period
+  key_algorithm                  = var.key_algorithm
+  key_protection_level           = var.key_protection_level
+  skip_initial_version_creation  = var.skip_initial_version_creation
+  crypto_key_backend             = var.crypto_key_backend
+  location                       = var.location
+  set_owners_for                 = var.set_owners_for
+  set_encrypters_for             = var.set_encrypters_for
+  encrypters                     = var.encrypters
+  labels                         = var.labels
+  import_only                    = var.import_only
+  project_id                     = var.project_id
+  keyring                        = var.keyring
+  prevent_destroy                = var.prevent_destroy
+  key_destroy_scheduled_duration = var.key_destroy_scheduled_duration
+  set_decrypters_for             = var.set_decrypters_for
+  purpose                        = var.purpose
+}

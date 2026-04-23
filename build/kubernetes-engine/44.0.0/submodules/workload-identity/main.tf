@@ -1,0 +1,25 @@
+module "kubernetes-engine_workload-identity" {
+  source                              = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
+  version                             = "44.0.0"
+  automount_service_account_token     = var.automount_service_account_token
+  name                                = var.name
+  project_id                          = var.project_id
+  use_existing_context                = var.use_existing_context
+  gcp_sa_name                         = var.gcp_sa_name
+  cluster_name                        = var.cluster_name
+  annotate_k8s_sa                     = var.annotate_k8s_sa
+  image_pull_secrets                  = var.image_pull_secrets
+  roles                               = var.roles
+  module_depends_on                   = var.module_depends_on
+  use_existing_gcp_sa                 = var.use_existing_gcp_sa
+  location                            = var.location
+  k8s_sa_name                         = var.k8s_sa_name
+  k8s_sa_project_id                   = var.k8s_sa_project_id
+  namespace                           = var.namespace
+  use_existing_k8s_sa                 = var.use_existing_k8s_sa
+  gcp_sa_display_name                 = var.gcp_sa_display_name
+  impersonate_service_account         = var.impersonate_service_account
+  additional_projects                 = var.additional_projects
+  gcp_sa_description                  = var.gcp_sa_description
+  gcp_sa_create_ignore_already_exists = var.gcp_sa_create_ignore_already_exists
+}

@@ -1,0 +1,27 @@
+module "forseti_client" {
+  source                          = "terraform-google-modules/forseti/google//modules/client"
+  version                         = "5.2.2"
+  client_ssh_allow_ranges         = var.client_ssh_allow_ranges
+  client_iam_module               = var.client_iam_module
+  project_id                      = var.project_id
+  client_type                     = var.client_type
+  client_access_config            = var.client_access_config
+  client_private                  = var.client_private
+  suffix                          = var.suffix
+  client_gcs_module               = var.client_gcs_module
+  client_config_module            = var.client_config_module
+  forseti_repo_url                = var.forseti_repo_url
+  client_instance_metadata        = var.client_instance_metadata
+  subnetwork                      = var.subnetwork
+  network_project                 = var.network_project
+  client_tags                     = var.client_tags
+  services                        = var.services
+  manage_firewall_rules           = var.manage_firewall_rules
+  forseti_home                    = var.forseti_home
+  network                         = var.network
+  client_boot_image               = var.client_boot_image
+  client_shielded_instance_config = var.client_shielded_instance_config
+  client_region                   = var.client_region
+  forseti_version                 = var.forseti_version
+  client_enabled                  = var.client_enabled
+}

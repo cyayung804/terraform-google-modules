@@ -1,0 +1,23 @@
+module "sap_sap_nw" {
+  source                 = "terraform-google-modules/sap/google//modules/sap_nw"
+  version                = "2.0.1"
+  zone                   = var.zone
+  machine_type           = var.machine_type
+  reservation_name       = var.reservation_name
+  custom_metadata        = var.custom_metadata
+  instance_name          = var.instance_name
+  sap_mnt_size           = var.sap_mnt_size
+  public_ip              = var.public_ip
+  service_account        = var.service_account
+  subnetwork             = var.subnetwork
+  linux_image_project    = var.linux_image_project
+  usr_sap_size           = var.usr_sap_size
+  swap_size              = var.swap_size
+  network_tags           = var.network_tags
+  primary_startup_url    = var.primary_startup_url
+  can_ip_forward         = var.can_ip_forward
+  project_id             = var.project_id
+  linux_image            = var.linux_image
+  sap_deployment_debug   = var.sap_deployment_debug
+  post_deployment_script = var.post_deployment_script
+}

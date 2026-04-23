@@ -1,0 +1,21 @@
+module "pubsub" {
+  source                            = "terraform-google-modules/pubsub/google"
+  version                           = "8.7.0"
+  push_subscriptions                = var.push_subscriptions
+  pull_subscriptions                = var.pull_subscriptions
+  schema                            = var.schema
+  create_subscriptions              = var.create_subscriptions
+  subscription_labels               = var.subscription_labels
+  message_storage_policy            = var.message_storage_policy
+  project_id                        = var.project_id
+  topic                             = var.topic
+  create_topic                      = var.create_topic
+  topic_labels                      = var.topic_labels
+  cloud_storage_subscriptions       = var.cloud_storage_subscriptions
+  topic_message_retention_duration  = var.topic_message_retention_duration
+  grant_cloud_storage_project_roles = var.grant_cloud_storage_project_roles
+  bigquery_subscriptions            = var.bigquery_subscriptions
+  topic_kms_key_name                = var.topic_kms_key_name
+  grant_bigquery_project_roles      = var.grant_bigquery_project_roles
+  grant_token_creator               = var.grant_token_creator
+}

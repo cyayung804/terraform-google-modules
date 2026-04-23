@@ -1,0 +1,26 @@
+module "address" {
+  source             = "terraform-google-modules/address/google"
+  version            = "5.0.0"
+  region             = var.region
+  addresses          = var.addresses
+  dns_short_names    = var.dns_short_names
+  enable_cloud_dns   = var.enable_cloud_dns
+  enable_reverse_dns = var.enable_reverse_dns
+  purpose            = var.purpose
+  prefix_length      = var.prefix_length
+  ip_version         = var.ip_version
+  project_id         = var.project_id
+  dns_managed_zone   = var.dns_managed_zone
+  network_tier       = var.network_tier
+  descriptions       = var.descriptions
+  names              = var.names
+  dns_domain         = var.dns_domain
+  dns_project        = var.dns_project
+  dns_ttl            = var.dns_ttl
+  dns_reverse_zone   = var.dns_reverse_zone
+  subnetwork         = var.subnetwork
+  address_type       = var.address_type
+  global             = var.global
+  dns_record_type    = var.dns_record_type
+  labels             = var.labels
+}

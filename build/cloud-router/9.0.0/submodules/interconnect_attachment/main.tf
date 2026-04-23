@@ -1,0 +1,23 @@
+module "cloud-router_interconnect_attachment" {
+  source                   = "terraform-google-modules/cloud-router/google//modules/interconnect_attachment"
+  version                  = "9.0.0"
+  ipsec_internal_addresses = var.ipsec_internal_addresses
+  project                  = var.project
+  region                   = var.region
+  admin_enabled            = var.admin_enabled
+  bandwidth                = var.bandwidth
+  mtu                      = var.mtu
+  interface                = var.interface
+  interconnect             = var.interconnect
+  type                     = var.type
+  description              = var.description
+  vlan_tag8021q            = var.vlan_tag8021q
+  create_interface         = var.create_interface
+  peer                     = var.peer
+  name                     = var.name
+  router                   = var.router
+  stack_type               = var.stack_type
+  edge_availability_domain = var.edge_availability_domain
+  candidate_subnets        = var.candidate_subnets
+  encryption               = var.encryption
+}

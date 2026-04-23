@@ -1,0 +1,21 @@
+module "gcloud_kubectl-wrapper" {
+  source                            = "terraform-google-modules/gcloud/google//modules/kubectl-wrapper"
+  version                           = "4.0.0"
+  skip_download                     = var.skip_download
+  internal_ip                       = var.internal_ip
+  service_account_key_file          = var.service_account_key_file
+  cluster_name                      = var.cluster_name
+  use_tf_google_credentials_env_var = var.use_tf_google_credentials_env_var
+  impersonate_service_account       = var.impersonate_service_account
+  cluster_location                  = var.cluster_location
+  kubectl_create_command            = var.kubectl_create_command
+  kubectl_destroy_command           = var.kubectl_destroy_command
+  create_cmd_triggers               = var.create_cmd_triggers
+  gcloud_sdk_version                = var.gcloud_sdk_version
+  project_id                        = var.project_id
+  enabled                           = var.enabled
+  module_depends_on                 = var.module_depends_on
+  additional_components             = var.additional_components
+  upgrade                           = var.upgrade
+  use_existing_context              = var.use_existing_context
+}

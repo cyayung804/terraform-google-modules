@@ -2,12 +2,12 @@
 
 set -e
 
-source .env || true
-
+source .env
 source install.sh
 
 function update_terraform_modules()
 {
+    local excluded=("secret")
     response="$(curl -fsSL "${base_url}?namespace=${namespace}&provider=${provider}&limit=999")"
 
     echo "  -> Initializing ${FUNCNAME}..."
@@ -18,15 +18,22 @@ function update_terraform_modules()
       versions_url="${base_url}/${namespace}/${name}/${provider}/versions"
       versions_json="$(curl -fsSL "${versions_url}")"
       latest_version="$(echo "${versions_json}" | jq -r '.modules[0].versions[].version' | sort -V | tail -n1)"
-      module_dir="build/${name}/${latest_version}"
+      module_dir="${base_dir}/${name}/${latest_version}"
       module_url="${base_url}/${namespace}/${name}/${provider}/${latest_version}"
       module_json="$(curl -fsSL "${module_url}")"
 
       echo "    -> Processing module ${name} version ${latest_version}..."
+
+      if [[ " ${excluded[@]} " =~ " ${name} " ]]; then
+        echo "     -> Skipping ${name} (excluded)..."
+        continue
+      fi
+
       if [ -d "${module_dir}" ]; then
         echo "     -> Skipping ${name} version ${latest_version} (already exists)..."
         continue
       fi
+
       mkdir -p "${module_dir}"
 
       echo "${module_json}" | jq -r '.root.readme // empty' > "${module_dir}/README.md"
@@ -81,6 +88,7 @@ function generate_terraform_modules()
     echo "  -> Installing dependencies from "$(readlink -f requirements.txt)"..."
     uv pip install -r "$(readlink -f requirements.txt)"
 
+    python3 main.py
 }
 
 function format_terraform_modules()

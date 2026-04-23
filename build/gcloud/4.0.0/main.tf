@@ -1,0 +1,22 @@
+module "gcloud" {
+  source                            = "terraform-google-modules/gcloud/google"
+  version                           = "4.0.0"
+  platform                          = var.platform
+  service_account_key_file          = var.service_account_key_file
+  activate_service_account          = var.activate_service_account
+  gcloud_sdk_version                = var.gcloud_sdk_version
+  enabled                           = var.enabled
+  skip_download                     = var.skip_download
+  create_cmd_entrypoint             = var.create_cmd_entrypoint
+  create_cmd_triggers               = var.create_cmd_triggers
+  destroy_cmd_body                  = var.destroy_cmd_body
+  gcloud_download_url               = var.gcloud_download_url
+  upgrade                           = var.upgrade
+  module_depends_on                 = var.module_depends_on
+  destroy_cmd_entrypoint            = var.destroy_cmd_entrypoint
+  jq_download_url                   = var.jq_download_url
+  create_cmd_body                   = var.create_cmd_body
+  additional_components             = var.additional_components
+  use_tf_google_credentials_env_var = var.use_tf_google_credentials_env_var
+  jq_version                        = var.jq_version
+}
