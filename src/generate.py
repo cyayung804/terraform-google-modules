@@ -48,51 +48,51 @@ def write_file(path, content):
         f.write(content.strip() + "\n")
 
 
-def render_root_inputs(env, context, out_dir):
+def render_module_inputs(module_env, context, out_dir):
     write_file(
         os.path.join(out_dir, "main.tf"),
-        env.get_template("root_main.tf.j2").render(**context),
+        module_env.get_template("main.tf.j2").render(**context),
     )
     write_file(
         os.path.join(out_dir, "variables.tf"),
-        env.get_template("root_variables.tf.j2").render(**context),
+        module_env.get_template("variables.tf.j2").render(**context),
     )
     write_file(
         os.path.join(out_dir, "default.tfvars"),
-        env.get_template("root_default.tfvars.j2").render(**context),
+        module_env.get_template("default.tfvars.j2").render(**context),
     )
 
 
-def render_root_outputs(env, context, out_dir):
+def render_module_outputs(module_env, context, out_dir):
     write_file(
         os.path.join(out_dir, "outputs.tf"),
-        env.get_template("root_outputs.tf.j2").render(**context),
+        module_env.get_template("outputs.tf.j2").render(**context),
     )
 
 
-def render_sub_inputs(env, context, out_dir):
+def render_submodule_inputs(submodule_env, context, out_dir):
     write_file(
         os.path.join(out_dir, "main.tf"),
-        env.get_template("sub_main.tf.j2").render(**context),
+        submodule_env.get_template("main.tf.j2").render(**context),
     )
     write_file(
         os.path.join(out_dir, "variables.tf"),
-        env.get_template("sub_variables.tf.j2").render(**context),
+        submodule_env.get_template("variables.tf.j2").render(**context),
     )
     write_file(
         os.path.join(out_dir, "default.tfvars"),
-        env.get_template("sub_default.tfvars.j2").render(**context),
+        submodule_env.get_template("default.tfvars.j2").render(**context),
     )
 
 
-def render_sub_outputs(env, context, out_dir):
+def render_submodule_outputs(submodule_env, context, out_dir):
     write_file(
         os.path.join(out_dir, "outputs.tf"),
-        env.get_template("sub_outputs.tf.j2").render(**context),
+        submodule_env.get_template("outputs.tf.j2").render(**context),
     )
 
 
-def generate_root_modules(base_dir, env, namespace, provider):
+def generate_modules(base_dir, module_env, namespace, provider):
     for module_name in os.listdir(base_dir):
         module_path = os.path.join(base_dir, module_name)
         if not os.path.isdir(module_path):
@@ -114,8 +114,8 @@ def generate_root_modules(base_dir, env, namespace, provider):
                     "provider": provider,
                     "inputs": load_inputs(input_json),
                 }
-                render_root_inputs(env, context, version_path)
-                print(f"Generated root module inputs: {module_name} {version_name}")
+                render_module_inputs(module_env, context, version_path)
+                print(f"Generated module inputs: {module_name} {version_name}")
 
             if os.path.isfile(output_json):
                 context = {
@@ -125,11 +125,11 @@ def generate_root_modules(base_dir, env, namespace, provider):
                     "provider": provider,
                     "outputs": load_outputs(output_json),
                 }
-                render_root_outputs(env, context, version_path)
-                print(f"Generated root outputs: {module_name} {version_name}")
+                render_module_outputs(module_env, context, version_path)
+                print(f"Generated module outputs: {module_name} {version_name}")
 
 
-def generate_submodules(base_dir, env, namespace, provider):
+def generate_submodules(base_dir, submodule_env, namespace, provider):
     for module_name in os.listdir(base_dir):
         module_path = os.path.join(base_dir, module_name)
         if not os.path.isdir(module_path):
@@ -161,7 +161,7 @@ def generate_submodules(base_dir, env, namespace, provider):
                         "provider": provider,
                         "inputs": load_inputs(input_json),
                     }
-                    render_sub_inputs(env, context, submodule_path)
+                    render_submodule_inputs(submodule_env, context, submodule_path)
                     print(
                         f"Generated submodule inputs: {module_name} {version_name} {submodule_name}"
                     )
@@ -175,7 +175,7 @@ def generate_submodules(base_dir, env, namespace, provider):
                         "provider": provider,
                         "outputs": load_outputs(output_json),
                     }
-                    render_sub_outputs(env, context, submodule_path)
+                    render_submodule_outputs(submodule_env, context, submodule_path)
                     print(
                         f"Generated submodule outputs: {module_name} {version_name} {submodule_name}"
                     )

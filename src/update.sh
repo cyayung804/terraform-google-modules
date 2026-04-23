@@ -3,23 +3,24 @@
 set -e
 
 source .env
-source install.sh
+
+echo "==> Running $(dirname "$(realpath "$0")")/update.sh"
 
 function update_terraform_modules()
 {
     local excluded=("secret")
-    response="$(curl --retry 3 --retry-delay 3 -fsSL "${base_url}?namespace=${namespace}&provider=${provider}&limit=999")"
+    response="$(curl --retry 3 --retry-delay 3 -fsSL "${tf_modules_base_url}?namespace=${tf_modules_namespace}&provider=${tf_modules_provider}&limit=999")"
 
     echo "  -> Initializing ${FUNCNAME}..."
 
     echo "  -> Fetching Terraform modules..."
     echo "${response}" | jq -r '.modules[].name' | while read -r name; do
 
-      versions_url="${base_url}/${namespace}/${name}/${provider}/versions"
+      versions_url="${tf_modules_base_url}/${tf_modules_namespace}/${name}/${tf_modules_provider}/versions"
       versions_json="$(curl --retry 3 --retry-delay 3 -fsSL "${versions_url}")"
       latest_version="$(echo "${versions_json}" | jq -r '.modules[0].versions[].version' | sort -V | tail -n1)"
-      module_dir="${base_dir}/${name}/${latest_version}"
-      module_url="${base_url}/${namespace}/${name}/${provider}/${latest_version}"
+      module_dir="${dir_output}/${name}/${latest_version}"
+      module_url="${tf_modules_base_url}/${tf_modules_namespace}/${name}/${tf_modules_provider}/${latest_version}"
       module_json="$(curl --retry 3 --retry-delay 3 -fsSL "${module_url}")"
 
       echo "    -> Processing module ${name} version ${latest_version}..."
@@ -92,7 +93,7 @@ function generate_terraform_modules()
     echo "  -> Installing dependencies from $(readlink -f requirements.txt)..."
     uv pip install -r "$(readlink -f requirements.txt)"
 
-    python3 main.py
+    python3 "$(dirname "$(realpath "$0")")/main.py"
 }
 
 function format_terraform_modules()
