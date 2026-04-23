@@ -21,6 +21,12 @@ function update_terraform_modules()
       module_dir="${base_dir}/${name}/${latest_version}"
       module_url="${base_url}/${namespace}/${name}/${provider}/${latest_version}"
       module_json="$(curl --retry 3 --retry-delay 3 -fsSL "${module_url}")"
+      root_readme="$(echo "${module_json}" | jq -c '.root.readme // empty')"
+      root_inputs="$(echo "${module_json}" | jq -c '.root.inputs // empty')"
+      root_outputs="$(echo "${module_json}" | jq -c '.root.outputs // empty')"
+      submodule_readme="$(echo "${submodule_json}" | jq -c '.readme // empty')"
+      submodule_inputs="$(echo "${submodule_json}" | jq -c '.inputs // empty')"
+      submodule_outputs="$(echo "${submodule_json}" | jq -c '.outputs // empty')"
 
       echo "    -> Processing module ${name} version ${latest_version}..."
 
@@ -36,14 +42,19 @@ function update_terraform_modules()
 
       mkdir -p "${module_dir}"
 
-      echo "${module_json}" | jq -r '.root.readme // empty' > "${module_dir}/README.md"
-
-      if echo "${module_json}" | jq '.root.inputs != null' | grep -q true; then
-        echo "${module_json}" | jq '.root.inputs' > "${module_dir}/input.json"
+      if [ -n "$readme" ]; then
+        echo "$readme" > "${module_dir}/README.md"
+        "      -> Saved ${module_dir}/README.md"
       fi
 
-      if echo "${module_json}" | jq '.root.outputs != null' | grep -q true; then
-        echo "${module_json}" | jq '.root.outputs' > "${module_dir}/output.json"
+      if [ -n "$inputs" ]; then
+        echo "$inputs" > "${module_dir}/input.json"
+        "      -> Saved ${module_dir}/input.json"
+      fi
+
+      if [ -n "$outputs" ]; then
+        echo "$outputs" > "${module_dir}/output.json"
+        "      -> Saved ${module_dir}/output.json"
       fi
 
       echo "      -> Checking for submodules..."
@@ -60,16 +71,22 @@ function update_terraform_modules()
             echo "       -> Skipping ${submodule_name} version ${latest_version} (already exists)..."
             continue
           fi
+
           mkdir -p "${submodule_dir}"
 
-          echo "${submodule_json}" | jq -r '.readme // empty' > "${submodule_dir}/README.md"
-
-          if echo "${submodule_json}" | jq '.inputs != null' | grep -q true; then
-            echo "${submodule_json}" | jq '.inputs' > "${submodule_dir}/input.json"
+          if [ -n "$readme" ]; then
+            echo "$readme" > "${submodule_dir}/README.md"
+            "      -> Saved ${submodule_dir}/README.md"
           fi
 
-          if echo "${submodule_json}" | jq '.outputs != null' | grep -q true; then
-            echo "${submodule_json}" | jq '.outputs' > "${submodule_dir}/output.json"
+          if [ -n "$inputs" ]; then
+            echo "$inputs" > "${submodule_dir}/input.json"
+            "      -> Saved ${submodule_dir}/input.json"
+          fi
+
+          if [ -n "$outputs" ]; then
+            echo "$outputs" > "${submodule_dir}/output.json"
+            "      -> Saved ${submodule_dir}/output.json"
           fi
 
         done
