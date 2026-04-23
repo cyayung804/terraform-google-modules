@@ -8,7 +8,7 @@ source install.sh
 function update_terraform_modules()
 {
     local excluded=("secret")
-    response="$(curl -fsSL "${base_url}?namespace=${namespace}&provider=${provider}&limit=999")"
+    response="$(curl --retry 3 --retry-delay 3 -fsSL "${base_url}?namespace=${namespace}&provider=${provider}&limit=999")"
 
     echo "  -> Initializing ${FUNCNAME}..."
 
@@ -16,11 +16,11 @@ function update_terraform_modules()
     echo "${response}" | jq -r '.modules[].name' | while read -r name; do
 
       versions_url="${base_url}/${namespace}/${name}/${provider}/versions"
-      versions_json="$(curl -fsSL "${versions_url}")"
+      versions_json="$(curl --retry 3 --retry-delay 3 -fsSL "${versions_url}")"
       latest_version="$(echo "${versions_json}" | jq -r '.modules[0].versions[].version' | sort -V | tail -n1)"
       module_dir="${base_dir}/${name}/${latest_version}"
       module_url="${base_url}/${namespace}/${name}/${provider}/${latest_version}"
-      module_json="$(curl -fsSL "${module_url}")"
+      module_json="$(curl --retry 3 --retry-delay 3 -fsSL "${module_url}")"
 
       echo "    -> Processing module ${name} version ${latest_version}..."
 
@@ -38,15 +38,17 @@ function update_terraform_modules()
 
       echo "${module_json}" | jq -r '.root.readme // empty' > "${module_dir}/README.md"
 
-      echo "${module_json}" | jq -e '.root.inputs | length > 0' > /dev/null 2>&1 && \
+      if echo "${module_json}" | jq '.root.inputs != null' | grep -q true; then
         echo "${module_json}" | jq '.root.inputs' > "${module_dir}/input.json"
+      fi
 
-      echo "${module_json}" | jq -e '.root.outputs | length > 0' > /dev/null 2>&1 && \
+      if echo "${module_json}" | jq '.root.outputs != null' | grep -q true; then
         echo "${module_json}" | jq '.root.outputs' > "${module_dir}/output.json"
+      fi
 
       echo "      -> Checking for submodules..."
 
-      if echo "${module_json}" | jq -e '.submodules | length > 0' > /dev/null 2>&1; then
+      if echo "${module_json}" | jq -e '.submodules?' > /dev/null; then
 
         echo "${module_json}" | jq -c '.submodules[]' | while read -r submodule_json; do
 
@@ -62,11 +64,13 @@ function update_terraform_modules()
 
           echo "${submodule_json}" | jq -r '.readme // empty' > "${submodule_dir}/README.md"
 
-          echo "${submodule_json}" | jq -e '.inputs | length > 0' > /dev/null 2>&1 && \
+          if echo "${submodule_json}" | jq '.inputs != null' | grep -q true; then
             echo "${submodule_json}" | jq '.inputs' > "${submodule_dir}/input.json"
+          fi
 
-          echo "${submodule_json}" | jq -e '.outputs | length > 0' > /dev/null 2>&1 && \
+          if echo "${submodule_json}" | jq '.outputs != null' | grep -q true; then
             echo "${submodule_json}" | jq '.outputs' > "${submodule_dir}/output.json"
+          fi
 
         done
       fi
@@ -85,7 +89,7 @@ function generate_terraform_modules()
 
     python --version
 
-    echo "  -> Installing dependencies from "$(readlink -f requirements.txt)"..."
+    echo "  -> Installing dependencies from $(readlink -f requirements.txt)..."
     uv pip install -r "$(readlink -f requirements.txt)"
 
     python3 main.py
