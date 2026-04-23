@@ -4,7 +4,8 @@ name: Scheduled file updates
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+    # 16:00 UTC is 00:00 (Midnight) Singapore Time
+    - cron: '0 16 * * *'
 
 env:
   git_user_email: 'cyayung804@gmail.com'
