@@ -1,5 +1,5 @@
 from dotenv import dotenv_values
-from jinja2 import Environment, FileSystemLoader, PrefixLoader
+from jinja2 import Environment, FileSystemLoader
 from generate import generate_modules, generate_submodules
 
 env_vars = dotenv_values(".env")

@@ -1,6 +1,5 @@
 import os
 import json
-from jinja2 import Environment
 
 
 def load_inputs(path):
@@ -103,6 +102,13 @@ def generate_modules(base_dir, module_env, namespace, provider):
             if not os.path.isdir(version_path):
                 continue
 
+            lock_file = os.path.join(version_path, ".module.lock")
+            if os.path.isfile(lock_file):
+                print(f"Skipping locked module: {module_name} {version_name}")
+                continue
+
+            locked = True
+
             input_json = os.path.join(version_path, "input.json")
             output_json = os.path.join(version_path, "output.json")
 
@@ -128,6 +134,10 @@ def generate_modules(base_dir, module_env, namespace, provider):
                 render_module_outputs(module_env, context, version_path)
                 print(f"Generated module outputs: {module_name} {version_name}")
 
+            if locked:
+                open(lock_file, "a").close()
+                print(f"Created lock file: {module_name} {version_name}")
+
 
 def generate_submodules(base_dir, submodule_env, namespace, provider):
     for module_name in os.listdir(base_dir):
@@ -148,6 +158,15 @@ def generate_submodules(base_dir, submodule_env, namespace, provider):
                 submodule_path = os.path.join(submodules_dir, submodule_name)
                 if not os.path.isdir(submodule_path):
                     continue
+
+                lock_file = os.path.join(submodule_path, ".module.lock")
+                if os.path.isfile(lock_file):
+                    print(
+                        f"Skipping locked module: {module_name} {version_name} {submodule_name}"
+                    )
+                    continue
+
+                locked = True
 
                 input_json = os.path.join(submodule_path, "input.json")
                 output_json = os.path.join(submodule_path, "output.json")
@@ -178,4 +197,10 @@ def generate_submodules(base_dir, submodule_env, namespace, provider):
                     render_submodule_outputs(submodule_env, context, submodule_path)
                     print(
                         f"Generated submodule outputs: {module_name} {version_name} {submodule_name}"
+                    )
+
+                if locked:
+                    open(lock_file, "a").close()
+                    print(
+                        f"Created lock file: {module_name} {version_name} {submodule_name}"
                     )
