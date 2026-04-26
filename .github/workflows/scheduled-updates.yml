@@ -8,9 +8,9 @@ on:
     - cron: '0 0,12 * * *'
 
 env:
-  TZ: Asia/Singapore
-  git_user_email: 'cyayung804@gmail.com'
-  git_user_name: cyayung804
+  TZ: "Asia/Singapore"
+  git_user_email: "github-actions[bot]@users.noreply.github.com"
+  git_user_name: "github-actions[bot]"
 
 permissions:
   contents: write
