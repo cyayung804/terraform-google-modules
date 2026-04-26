@@ -4,9 +4,11 @@ name: Scheduled file updates
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 2 * * *'
+    # 00:00 UTC is 8am SGT | 12:00 UTC is 8pm SGT
+    - cron: '0 0,12 * * *'
 
 env:
+  TZ: Asia/Singapore
   git_user_email: 'cyayung804@gmail.com'
   git_user_name: cyayung804
 
