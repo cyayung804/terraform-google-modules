@@ -4,8 +4,8 @@ name: Scheduled file updates
 on:
   workflow_dispatch:
   schedule:
-    # 00:00 UTC is 8am SGT | 12:00 UTC is 8pm SGT
-    - cron: '0 0,12 * * *'
+    - cron: '0 8,20 * * *'
+      timezone: "Asia/Singapore"
 
 env:
   TZ: "Asia/Singapore"
