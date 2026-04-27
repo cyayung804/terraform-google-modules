@@ -9,8 +9,6 @@ on:
 
 env:
   TZ: "Asia/Singapore"
-  git_user_email: "github-actions[bot]@users.noreply.github.com"
-  git_user_name: "github-actions[bot]"
 
 permissions:
   contents: write
@@ -28,12 +26,20 @@ jobs:
           make install
           make update
 
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v7
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
       - name: Commit and push changes
         run: |
-          git config --local user.email ${{ env.git_user_email }}
-          git config --local user.name ${{ env.git_user_name }}
+          git config --local user.email "cyayung804@gmail.com"
+          git config --local user.name "cyayung804"
           git add -A
-          git commit -m "Scheduled file updates: Run update.sh" || echo "No changes to commit"
+          git commit -S -m "Scheduled file updates: Run update.sh" || echo "No changes to commit"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
