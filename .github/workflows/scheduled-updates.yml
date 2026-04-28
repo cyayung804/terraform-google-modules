@@ -25,6 +25,7 @@ jobs:
         run: |
           make install
           make update
+          make files
 
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v7

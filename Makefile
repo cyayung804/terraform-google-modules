@@ -1,14 +1,20 @@
 # Makefile for terraform-google-modules
 
-.PHONY: help install update
+.PHONY: help files install update
 
 
 help:
 	@echo "Makefile for terraform-google-modules"
 	@echo ""
 	@echo "Usage:"
-	@echo "  make install          - Install dependencies"
-	@echo "  make update           - Update the main project"
+	@echo "  make help             - Show this help"
+	@echo "  make files            - List files"
+	@echo "  make install          - Run install.sh"
+	@echo "  make update           - Run update.sh"
+
+
+files:
+	@find . -path './.git' -prune -o -ls > FILES
 
 
 install:

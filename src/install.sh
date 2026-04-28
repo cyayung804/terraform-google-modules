@@ -4,6 +4,20 @@ set -e
 
 echo "==> Running $(dirname "$(realpath "$0")")/install.sh"
 
+function cleanup() {
+    echo "  -> Cleaning up temporary files..."
+    rm -rfv /tmp/terraform.zip
+    rm -rfv /tmp/terraform
+}
+
+function install_deps()
+{
+    echo "  -> Initializing ${FUNCNAME}..."
+
+    $(which sudo) apt-get update
+    $(which sudo) apt-get install -y curl git gzip tar make unzip
+}
+
 function install_terraform()
 {
     local terraform_version="1.14.9"
@@ -19,27 +33,24 @@ function install_terraform()
     unzip /tmp/terraform.zip terraform -d /tmp
     sudo cp /tmp/terraform /usr/local/bin/terraform
     sudo chmod +x /usr/local/bin/terraform
-
-    echo "  -> Cleaning up..."
-    sudo rm -v /tmp/terraform
-    sudo rm -v /tmp/terraform.zip
 }
 
 function install_uv()
 {
-    local python_version="3.10"
     local uv_download_url="https://astral.sh/uv/install.sh"
     uv_install_path="${HOME}/.local/bin"
+    python_version=$(cat .python-version)
 
     echo "  -> Initializing ${FUNCNAME}..."
 
     echo "  -> Downloading uv..."
     curl -fsSL "${uv_download_url}" | sh
-    export PATH="${uv_install_path}:${PATH}"
+    export PATH="${PATH}:${uv_install_path}"
 
     echo "  -> Installing Python ${python_version}..."
     uv python install "${python_version}" --default
 }
 
+install_deps
 install_terraform
 install_uv
