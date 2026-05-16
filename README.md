@@ -1,10 +1,5 @@
-Google Cloud and HashiCorp
+Terraform Google modules
 
-Terraform modules for Google Cloud
+Fetches all modules from the terraform-google-modules Terraform registry namespace.
 
-Daily updates with version releases from the official website:
-https://registry.terraform.io/namespaces/terraform-google-modules
-
-This repository fetches all modules under terraform-google-modules namespace, organizing them by name, version, and submodule(s) within the `generated` folder.
-
-Automatically generates `tf` files based on the upstream source.
+A GitHub Actions workflow runs daily to get the latest module versions and generate .tf files from inputs.json and outputs.json. Output is written to the generated/ folder.
