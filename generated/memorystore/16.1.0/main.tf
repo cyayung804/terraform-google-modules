@@ -1,0 +1,27 @@
+module "memorystore" {
+  source                  = "terraform-google-modules/memorystore/google"
+  version                 = "16.1.0"
+  read_replicas_mode      = var.read_replicas_mode
+  alternative_location_id = var.alternative_location_id
+  reserved_ip_range       = var.reserved_ip_range
+  auth_enabled            = var.auth_enabled
+  customer_managed_key    = var.customer_managed_key
+  persistence_config      = var.persistence_config
+  memory_size_gb          = var.memory_size_gb
+  replica_count           = var.replica_count
+  redis_configs           = var.redis_configs
+  secondary_ip_range      = var.secondary_ip_range
+  display_name            = var.display_name
+  redis_version           = var.redis_version
+  connect_mode            = var.connect_mode
+  authorized_network      = var.authorized_network
+  enable_apis             = var.enable_apis
+  labels                  = var.labels
+  transit_encryption_mode = var.transit_encryption_mode
+  maintenance_policy      = var.maintenance_policy
+  project_id              = var.project_id
+  region                  = var.region
+  name                    = var.name
+  tier                    = var.tier
+  location_id             = var.location_id
+}
