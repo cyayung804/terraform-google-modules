@@ -1,0 +1,19 @@
+module "network_vpc" {
+  source                                    = "terraform-google-modules/network/google//modules/vpc"
+  version                                   = "18.1.1"
+  delete_default_internet_gateway_routes    = var.delete_default_internet_gateway_routes
+  enable_ipv6_ula                           = var.enable_ipv6_ula
+  bgp_best_path_selection_mode              = var.bgp_best_path_selection_mode
+  bgp_inter_region_cost                     = var.bgp_inter_region_cost
+  network_profile                           = var.network_profile
+  project_id                                = var.project_id
+  network_name                              = var.network_name
+  routing_mode                              = var.routing_mode
+  mtu                                       = var.mtu
+  internal_ipv6_range                       = var.internal_ipv6_range
+  network_firewall_policy_enforcement_order = var.network_firewall_policy_enforcement_order
+  bgp_always_compare_med                    = var.bgp_always_compare_med
+  shared_vpc_host                           = var.shared_vpc_host
+  description                               = var.description
+  auto_create_subnetworks                   = var.auto_create_subnetworks
+}
