@@ -1,0 +1,19 @@
+module "network_fabric-net-firewall" {
+  source                  = "terraform-google-modules/network/google//modules/fabric-net-firewall"
+  version                 = "18.1.2"
+  admin_ranges            = var.admin_ranges
+  http_source_ranges      = var.http_source_ranges
+  https_source_ranges     = var.https_source_ranges
+  network                 = var.network
+  https_target_tags       = var.https_target_tags
+  project_id              = var.project_id
+  internal_allow          = var.internal_allow
+  http_target_tags        = var.http_target_tags
+  custom_rules            = var.custom_rules
+  internal_ranges         = var.internal_ranges
+  ssh_source_ranges       = var.ssh_source_ranges
+  ssh_target_tags         = var.ssh_target_tags
+  internal_ranges_enabled = var.internal_ranges_enabled
+  internal_target_tags    = var.internal_target_tags
+  admin_ranges_enabled    = var.admin_ranges_enabled
+}
